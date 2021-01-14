@@ -1,8 +1,7 @@
-// const mongoose = require("../db/connections")
-// const Schema = mongoose.Schema
+const mongoose = require("../db/connections")
 
-// const Token = new Schema({
-// 	access_token: Number,
-// })
+const Token = mongoose.Schema({
+	access_token: String,
+})
 
-// module.exports = mongoose.model("Token", Token)
+module.exports = mongoose.model("Token", Token)

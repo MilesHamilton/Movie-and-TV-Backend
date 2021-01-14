@@ -3,6 +3,9 @@ const router = new express()
 const parser = require("body-parser")
 const fetch = require("node-fetch")
 const btoa = require("btoa")
+const fs = require("fs")
+const Token = require("../models/token")
+const { db } = require("../models/token")
 router.use(parser.json())
 
 const getToken = async () => {
@@ -20,14 +23,22 @@ const getToken = async () => {
 		},
 		body: "grant_type=client_credentials",
 	})
+	const MongoClient = require("mongodb").MongoClient
+	const url = "mongodb://localhost:27017/list"
 	const data = await result.json()
-	console.log(data)
 
-	router.get("/", (req, res) => {
-		res.json(data)
-		console.log(res)
+	MongoClient.connect(url, (err, db) => {
+		if (err) {
+			console.log(err)
+		}
 	})
 }
 getToken()
+
+// router.get("/", (req, res) => {
+// 	Token.find({}).then((token) => {
+// 		res.json(token)
+// 	})
+// })
 
 module.exports = router
