@@ -5,7 +5,6 @@ const fetch = require("node-fetch")
 const btoa = require("btoa")
 const fs = require("fs")
 const Token = require("../models/token")
-const { db } = require("../models/token")
 router.use(parser.json())
 
 const getToken = async () => {
@@ -14,8 +13,8 @@ const getToken = async () => {
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded",
 			"Authorization":
-				"Basic" +
-				Buffer.from(
+				"Basic " +
+				btoa(
 					process.env.SPOTIFY_CLIENT_ID +
 						":" +
 						process.env.SPOTIFY_CLIENT_SECRET
@@ -26,6 +25,20 @@ const getToken = async () => {
 	const MongoClient = require("mongodb").MongoClient
 	const url = "mongodb://localhost:27017/list"
 	const data = await result.json()
+	console.log(result)
+	console.log(data)
+
+	Token.deleteMany({})
+	Token.insertMany(data).then((res) => {
+		console.log(res)
+		db.close
+	})
+
+	router.get("/", (req, res) => {
+		console.log(data)
+	})
+
+	const key = fs.readFileSync()
 
 	MongoClient.connect(url, (err, db) => {
 		if (err) {
