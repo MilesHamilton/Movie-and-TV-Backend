@@ -28,9 +28,8 @@ const getToken = async () => {
 	console.log(result)
 	console.log(data)
 
-	Token.deleteMany({})
+	Token.deleteMany({}).then((res) => {})
 	Token.insertMany(data).then((res) => {
-		console.log(res)
 		db.close
 	})
 
