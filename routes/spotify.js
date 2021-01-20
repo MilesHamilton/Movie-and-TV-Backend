@@ -23,7 +23,7 @@ const getToken = async () => {
 		body: "grant_type=client_credentials",
 	})
 	const MongoClient = require("mongodb").MongoClient
-	const url = "mongodb://localhost:27017/list"
+	const url = "mongodb://localhost:27017/mov-backend"
 	const data = await result.json()
 	console.log(result)
 	console.log(data)
@@ -35,6 +35,7 @@ const getToken = async () => {
 
 	router.get("/", (req, res) => {
 		console.log(data)
+		res.json(data)
 	})
 
 	const key = fs.readFileSync()
@@ -46,11 +47,5 @@ const getToken = async () => {
 	})
 }
 getToken()
-
-// router.get("/", (req, res) => {
-// 	Token.find({}).then((token) => {
-// 		res.json(token)
-// 	})
-// })
 
 module.exports = router
