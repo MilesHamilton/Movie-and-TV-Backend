@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/",
+            "lambdaFunction": "spotify",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/"
+        }
+    ],
+    "resourceName": "spotifyapi",
+    "apiName": "spotifyapi",
+    "functionArns": [
+        {
+            "lambdaFunction": "spotify"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-movieuibackend-dev-113526-authRole",
+        "unAuthRoleName": "amplify-movieuibackend-dev-113526-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "spotify",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
